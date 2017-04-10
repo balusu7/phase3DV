@@ -83,7 +83,10 @@ var drawSpiral = function(g, gHeight, gWidth) {
       .data(someData)
       .enter()
       .append("rect")
-        .attr("class","SpiralRect")
+        .attr("class",function(d){
+            var date = d.date.toDateString().split(" ");
+            return "SpiralRect " + date[1];
+        })
       .attr("x", function(d,i){
         
         var linePer = timeScale(d.date),
@@ -161,8 +164,9 @@ var drawSpiral = function(g, gHeight, gWidth) {
         tooltip.select('.date').html("Month and Year: <b>" + res[1] + res[3] + "</b>");
         tooltip.select('.value').html("check in: <b>" + Math.round(d.value*100)/100 + "<b>");
 
-        d3.select(this)
-        .style("fill","#FFFFFF")
+        var SelectName = "."+res[1];
+        d3.selectAll(SelectName)
+        .style("fill","#2c24ed")
         .style("stroke","#000000")
         .style("stroke-width","2px");
 
