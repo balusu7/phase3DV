@@ -1,10 +1,12 @@
-var drawLine = function(g, gHeight, gWidth){
+var drawLine = function(g, gHeight, gWidth,fname){
 
   var svg = g,
     margin = {top: 20, right: 20, bottom: 20, left: 20},
     width = gWidth - margin.left - margin.right,
-    height = gHeight - margin.top - margin.bottom,
-    g = svg.append("g")
+    height = gHeight - margin.top - margin.bottom;
+
+  d3.selectAll(".lineClass").remove();
+  var g = svg.append("g")
         .attr("class","lineClass")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -21,7 +23,7 @@ var line = d3.line()
     .y(function(d) { return y(d.close); });
 
 //console.log("sdff");
-d3.tsv("monthdata.tsv", function(d) {
+d3.tsv(fname, function(d) {
   d.date = parseTime(d.date);
   d.close = +d.close;
   return d;

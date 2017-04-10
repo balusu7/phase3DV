@@ -6,8 +6,9 @@
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/line.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
 </head>
 <body>
     <svg width="1200" height="700"></svg>
@@ -16,16 +17,16 @@
         var width = 1200;
         var spiralHeight = 700;
         var spiralWidth =500;
-        var lineHeight = 350;
+        var lineHeight = 300;
         var lineWidth = 700;
 
         var gSpiral = d3.select("svg").append("g").attr("class", "mainSpiral");
-        drawSpiral(gSpiral,spiralHeight,spiralWidth);
+        drawSpiral(gSpiral,spiralHeight,spiralWidth,lineHeight,lineWidth);
 
         var gLine = d3.select("svg").append("g").attr("class", "mainLine")
             .attr("transform","translate("+spiralWidth+", 0)");
 
-        drawLine(gLine,lineHeight,lineWidth);
+        drawLine(gLine,lineHeight,lineWidth,"monthdata.tsv");
     </script>
 </body>
 </html>

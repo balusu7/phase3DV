@@ -1,4 +1,4 @@
-var drawSpiral = function(g, gHeight, gWidth) {
+var drawSpiral = function(g, gHeight, gWidth,lineHeight,lineWidth) {
     var width = gWidth,
       height = gHeight,
       start = 0,
@@ -51,7 +51,7 @@ var drawSpiral = function(g, gHeight, gWidth) {
    var res = testDate.split("-");
    var formatMonth = d3.timeFormat("%B"),
        formatDay = d3.timeFormat("%A"),
-       dat = new Date(res[0],res[1],res[2]);
+       dat = new Date(res[0],res[1]-1,res[2]);
        
   	//console.log(dat.getMonth());
   	var val = data[i].count;//Math.floor(Math.random() * (10 - 1)) + 1;
@@ -77,7 +77,7 @@ var drawSpiral = function(g, gHeight, gWidth) {
       .domain([0, d3.max(someData, function(d){
         return d.value;
       })])
-      .range([0, (r / numSpirals) - 30]);
+      .range([0, (r / numSpirals) - 40]);//added for bar height
 
     svg.selectAll("rect")
       .data(someData)
@@ -111,7 +111,7 @@ var drawSpiral = function(g, gHeight, gWidth) {
         return yScale(d.value);
       })
       .style("fill", function(d){return color(d.group);})
-      .style("stroke", "none")
+      .style("stroke", function(d){return color(d.group);}).style("stroke-width","6px")
       .attr("transform", function(d){
         return "rotate(" + d.a + "," + d.x  + "," + d.y + ")"; // rotate the bar
       });
@@ -159,7 +159,7 @@ var drawSpiral = function(g, gHeight, gWidth) {
 
     svg.selectAll(".SpiralRect")
     .on('mouseover', function(d) {
-        console.log("in mouse over");
+        //console.log("in mouse over");
 		 var res = d.date.toDateString().split(" ");
         tooltip.select('.date').html("Month and Year: <b>" + res[1] + res[3] + "</b>");
         tooltip.select('.value').html("check in: <b>" + Math.round(d.value*100)/100 + "<b>");
@@ -167,8 +167,8 @@ var drawSpiral = function(g, gHeight, gWidth) {
         var SelectName = "."+res[1];
         d3.selectAll(SelectName)
         .style("fill","#2c24ed")
-        .style("stroke","#000000")
-        .style("stroke-width","2px");
+        .style("stroke","#2c24ed")
+        .style("stroke-width","6px");
 
         tooltip.style('display', 'block');
         tooltip.style('opacity',2);
@@ -178,10 +178,27 @@ var drawSpiral = function(g, gHeight, gWidth) {
         tooltip.style('top', (d3.event.layerY + 10) + 'px')
         .style('left', (d3.event.layerX - 25) + 'px');
     })
+        .on('click',function(d) {
+            console.log("in mouse over");
+            var res = d.date.toDateString().split(" ");
+            //tooltip.select('.date').html("Month and Year: <b>" + res[1] + res[3] + "</b>");
+            //tooltip.select('.value').html("check in: <b>" + Math.round(d.value*100)/100 + "<b>");
+            tooltip.style('display', 'none');
+            var SelectName = "."+res[1];
+            d3.selectAll(SelectName)
+                .style("fill","#000000")
+                .style("stroke","#000000")
+                .style("stroke-width","6px");
+
+            drawLine(gLine,lineHeight,lineWidth,"Jan17.tsv");
+            //tooltip.style('display', 'block');
+            //tooltip.style('opacity',2);
+
+        })
     .on('mouseout', function(d) {
         d3.selectAll("rect")
         .style("fill", function(d){return color(d.group);})
-        .style("stroke", "none")
+        .style("stroke", function(d){return color(d.group);}).style("stroke-width","6px")
 
         tooltip.style('display', 'none');
         tooltip.style('opacity',0);
