@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/line.js"></script>
+</head>
+<body>
+    <svg width="1200" height="700"></svg>
+    <script>
+        var height = 700;
+        var width = 1200;
+        var spiralHeight = 700;
+        var spiralWidth =500;
+        var lineHeight = 350;
+        var lineWidth = 700;
+
+        var gSpiral = d3.select("svg").append("g").attr("class", "mainSpiral");
+        drawSpiral(gSpiral,spiralHeight,spiralWidth);
+
+        var gLine = d3.select("svg").append("g").attr("class", "mainLine")
+            .attr("transform","translate("+spiralWidth+", 0)");
+
+        drawLine(gLine,lineHeight,lineWidth);
+    </script>
+</body>
+</html>
