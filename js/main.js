@@ -189,8 +189,8 @@ var drawSpiral = function(g, gHeight, gWidth,lineHeight,lineWidth) {
                 .style("fill","#000000")
                 .style("stroke","#000000")
                 .style("stroke-width","6px");
-
-            drawLine(gLine,lineHeight,lineWidth,"Jan17.tsv");
+            var monthYear = res[1] + "-"+res[3];
+            drawLine(gLine,lineHeight,lineWidth,"line_data.tsv",monthYear);
             //tooltip.style('display', 'block');
             //tooltip.style('opacity',2);
 

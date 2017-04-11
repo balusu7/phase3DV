@@ -1,4 +1,4 @@
-var drawLine = function(g, gHeight, gWidth,fname){
+var drawLine = function(g, gHeight, gWidth,fname,MonthYear){
 
   var svg = g,
     margin = {top: 20, right: 20, bottom: 20, left: 20},
@@ -24,9 +24,15 @@ var line = d3.line()
 
 //console.log("sdff");
 d3.tsv(fname, function(d) {
+
   d.date = parseTime(d.date);
+    var res = d.date.toDateString().split(" ");
+    var monyear = res[1] + "-"+res[3];
+    console.log(MonthYear);
+    console.log(monyear);
   d.close = +d.close;
-  return d;
+  if(monyear==MonthYear){
+  return d;}
 }, function(error, data) {
   if (error) throw error;
 
