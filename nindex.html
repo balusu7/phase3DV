@@ -21,11 +21,11 @@
         var lineWidth = 700;
 
         // spiral data file path
-        var spiralData = "final_spiral.csv";//final_spiral_working.csv
+        var spiralData = "secbussiness_final_spiral.csv";//final_spiral.csv
         // line data file path
-        var lineData   = "line_data.tsv";
+        var lineData   = "secbussiness_line_data.tsv";//line_data.tsv
         // spiral data file length i.e no of rows in spiral Data
-        var SpiralDataSize = 750;//330
+        var SpiralDataSize = 750;
 
         var gSpiral = d3.select("svg").append("g").attr("class", "mainSpiral");
         drawSpiral(gSpiral,spiralHeight,spiralWidth,lineHeight,lineWidth,spiralData,lineData,SpiralDataSize);
