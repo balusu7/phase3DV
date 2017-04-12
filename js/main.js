@@ -1,4 +1,4 @@
-var drawSpiral = function(g, gHeight, gWidth,lineHeight,lineWidth) {
+var drawSpiral = function(g, gHeight, gWidth,lineHeight,lineWidth,spiralData,lineData,SpiralDataSize) {
     var width = gWidth,
       height = gHeight,
       start = 0,
@@ -38,12 +38,12 @@ var drawSpiral = function(g, gHeight, gWidth,lineHeight,lineWidth) {
 
     var spiralLength = path.node().getTotalLength(),
   
-        N = 335,
+        N = SpiralDataSize,
         barWidth = (spiralLength / N) - 1;
   
    var someData = [];
    
-   d3.csv("final_spiral.csv", function(data) {
+   d3.csv(spiralData, function(data) {
     
     for (var i = 0; i < N; i++) {
    // console.log(data[i].date);
@@ -85,7 +85,7 @@ var drawSpiral = function(g, gHeight, gWidth,lineHeight,lineWidth) {
       .append("rect")
         .attr("class",function(d){
             var date = d.date.toDateString().split(" ");
-            return "SpiralRect " + date[1];
+            return "SpiralRect " + date[1]+date[3];
         })
       .attr("x", function(d,i){
         
@@ -164,7 +164,7 @@ var drawSpiral = function(g, gHeight, gWidth,lineHeight,lineWidth) {
         tooltip.select('.date').html("Month and Year: <b>" + res[1] + res[3] + "</b>");
         tooltip.select('.value').html("check in: <b>" + Math.round(d.value*100)/100 + "<b>");
 
-        var SelectName = "."+res[1];
+        var SelectName = "."+res[1]+res[3];
         d3.selectAll(SelectName)
         .style("fill","#2c24ed")
         .style("stroke","#2c24ed")
@@ -184,13 +184,13 @@ var drawSpiral = function(g, gHeight, gWidth,lineHeight,lineWidth) {
             //tooltip.select('.date').html("Month and Year: <b>" + res[1] + res[3] + "</b>");
             //tooltip.select('.value').html("check in: <b>" + Math.round(d.value*100)/100 + "<b>");
             tooltip.style('display', 'none');
-            var SelectName = "."+res[1];
+            var SelectName = "."+res[1]+res[3];
             d3.selectAll(SelectName)
                 .style("fill","#000000")
                 .style("stroke","#000000")
                 .style("stroke-width","6px");
             var monthYear = res[1] + "-"+res[3];
-            drawLine(gLine,lineHeight,lineWidth,"line_data.tsv",monthYear);
+            drawLine(gLine,lineHeight,lineWidth,lineData,monthYear);
             //tooltip.style('display', 'block');
             //tooltip.style('opacity',2);
 
