@@ -28,9 +28,13 @@ d3.tsv(fname, function(d) {
   d.date = parseTime(d.date);
     var res = d.date.toDateString().split(" ");
     var monyear = res[1] + "-"+res[3];
-    console.log(MonthYear);
-    console.log(monyear);
+    //console.log(MonthYear);
+    //console.log(monyear);
   d.close = +d.close;
+  if(MonthYear=="init"){
+    console.log("initlo");
+    return d;
+  }
   if(monyear==MonthYear){
   return d;}
 }, function(error, data) {
