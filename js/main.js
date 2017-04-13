@@ -162,7 +162,10 @@ var drawSpiral = function(g, gHeight, gWidth,lineHeight,lineWidth,spiralData,lin
         //console.log("in mouse over");
 		 var res = d.date.toDateString().split(" ");
         tooltip.select('.date').html("Month and Year: <b>" + res[1] + res[3] + "</b>");
-        tooltip.select('.value').html("check in: <b>" + Math.round(d.value*100)/100 + "<b>");
+        var val = Math.round((((d.value-0.1)*(39.0))+1.0 )*100)/100;
+        //console.log("cal"+val);
+        tooltip.select('.value').html("check in: <b>" + val + "<b>");
+
 
         var SelectName = "."+res[1]+res[3];
         d3.selectAll(SelectName)
@@ -179,7 +182,7 @@ var drawSpiral = function(g, gHeight, gWidth,lineHeight,lineWidth,spiralData,lin
         .style('left', (d3.event.layerX - 25) + 'px');
     })
         .on('click',function(d) {
-            console.log("in mouse over");
+            //console.log("in mouse over");
             var res = d.date.toDateString().split(" ");
             //tooltip.select('.date').html("Month and Year: <b>" + res[1] + res[3] + "</b>");
             //tooltip.select('.value').html("check in: <b>" + Math.round(d.value*100)/100 + "<b>");
