@@ -1,7 +1,7 @@
 var drawLine = function(g, gHeight, gWidth,fname,MonthYear){
 
   var svg = g,
-    margin = {top: 20, right: 20, bottom: 20, left: 20},
+    margin = {top: 150, right: 20, bottom: 20, left: 20},
     width = gWidth - margin.left - margin.right,
     height = gHeight - margin.top - margin.bottom;
 
