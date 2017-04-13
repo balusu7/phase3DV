@@ -41,13 +41,16 @@ d3.tsv(fname, function(d) {
   if (error) throw error;
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain([0,d3.max(data, function(d) { return d.close; })]);
+  y.domain([0,5]);//d3.max(data, function(d) { return d.close; })]);
 
   g.append("g")
-      .attr("transform", "translate(0," + height + ")")
+      .attr("transform", "translate(0," + (height+1) + ")")
+      .attr("fill", "#000")
       .call(d3.axisBottom(x).ticks(10))
-    .select(".domain")
-      .remove();
+      .attr("x", 6)
+      .attr("dx", "0.71em");
+    //.select(".domain")
+      //.remove();
 
   g.append("g")
       .call(d3.axisLeft(y))
