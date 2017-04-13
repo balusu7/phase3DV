@@ -45,7 +45,7 @@ d3.tsv(fname, function(d) {
 
   g.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x))
+      .call(d3.axisBottom(x).ticks(10))
     .select(".domain")
       .remove();
 
@@ -57,7 +57,7 @@ d3.tsv(fname, function(d) {
       .attr("y", 6)
       .attr("dy", "0.71em")
       .attr("text-anchor", "end")
-      .text("check-in");
+      .text("Avg Rating");
 
   g.append("path")
       .datum(data)
